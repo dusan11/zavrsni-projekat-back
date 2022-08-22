@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderStatusController;
 
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,12 @@ Route::put('lager/{id}', [StockController::class, 'update']);
 Route::delete('lager/{id}', [StockController::class, 'destroy']);
 Route::get('lager/proizvodi', [StockController::class, 'stockLevel']);
 Route::get('lager/proizvodi/{id}', [StockController::class, 'stockLevelProduct']);
+
+Route::get('transakcije', [TransactionController::class, 'index']);
+Route::get('transakcije/{id}', [TransactionController::class, 'show']);
+Route::post('transakcije', [TransactionController::class, 'store']);
+Route::put('transakcije/{id}', [TransactionController::class, 'update']);
+Route::delete('transakcije/{id}', [TransactionController::class, 'destroy']);
+
+Route::get('transakcije/kompanija/{companyId}', [TransactionController::class, 'financialCard']);
+Route::get('transakcije/narudzba/{orderId}', [TransactionController::class, 'orderTransactions']);
