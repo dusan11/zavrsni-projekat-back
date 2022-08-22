@@ -12,6 +12,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransactionController;
 
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -57,3 +59,9 @@ Route::delete('transakcije/{id}', [TransactionController::class, 'destroy']);
 
 Route::get('transakcije/kompanija/{companyId}', [TransactionController::class, 'financialCard']);
 Route::get('transakcije/narudzba/{orderId}', [TransactionController::class, 'orderTransactions']);
+
+Route::get('korisnik/{id}', [UserController::class, 'show']);
+Route::post('registracija', [UserController::class, 'register']);
+Route::put('korisnik/{id}/promijeni-email', [UserController::class, 'updateName']);
+Route::put('korisnik/{id}/promijeni-email', [UserController::class, 'updateEmail']);
+Route::post('login', [UserController::class, 'login']);
