@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderTypeController;
 use App\Http\Controllers\OrderStatusController;
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,11 @@ Route::put('narudzbe/{id}/cijena', [OrderController::class, 'updateTotalPrice'])
 Route::delete('narudzbe/{id}', [OrderController::class, 'destroy']);
 Route::post('narudzbe/{narudzba_id}/proizvodi/{proizvod_id}', [OrderController::class, 'addProduct']);
 Route::delete('narudzbe/{narudzba_id}/proizvodi/{proizvod_id}', [OrderController::class, 'removeProduct']);
+
+Route::get('lager', [StockController::class, 'index']);
+Route::get('lager/{id}', [StockController::class, 'show']);
+Route::post('lager', [StockController::class, 'store']);
+Route::put('lager/{id}', [StockController::class, 'update']);
+Route::delete('lager/{id}', [StockController::class, 'destroy']);
+Route::get('lager/proizvodi', [StockController::class, 'stockLevel']);
+Route::get('lager/proizvodi/{id}', [StockController::class, 'stockLevelProduct']);
