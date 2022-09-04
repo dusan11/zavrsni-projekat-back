@@ -62,6 +62,6 @@ Route::get('transakcije/narudzba/{orderId}', [TransactionController::class, 'ord
 
 Route::get('korisnik/{id}', [UserController::class, 'show']);
 Route::post('registracija', [UserController::class, 'register']);
-Route::put('korisnik/{id}/promijeni-email', [UserController::class, 'updateName']);
+Route::put('korisnik/{id}/promijeni-ime', [UserController::class, 'updateName']);
 Route::put('korisnik/{id}/promijeni-email', [UserController::class, 'updateEmail']);
 Route::post('login', [UserController::class, 'login']);
