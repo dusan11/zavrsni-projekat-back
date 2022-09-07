@@ -44,7 +44,7 @@ class OrderController extends Controller
       
         $order->update([
             'date' => $request->date,
-            'order_type_id' => $request->orderType,
+            'order_type_id' => $request->orderTypeId,
             'company_id' => $request->companyId,
             'order_status_id' => $request->orderStatusId,
             'total_price' => $request->total_price,
