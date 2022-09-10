@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Stock;
+use DB;
 
 class StockController extends Controller
 {
@@ -21,7 +22,7 @@ class StockController extends Controller
 
     public function store(Request $request)
     {
-        $stock = Order::insert([
+        $stock = Stock::insert([
             'amount' => $request->amount,
             'product_id' => $request->product,
             'created_at' =>  date('Y-m-d H:i:s'),
@@ -30,7 +31,7 @@ class StockController extends Controller
         
         $respData['status']=201;
         $respData['message']='Uspješno dodato.';
-        $respData['order']=$stock;
+        $respData['stock']=$stock;
 
         return response()->json($respData);
     }
