@@ -48,7 +48,7 @@ Route::get('lager/{id}', [StockController::class, 'show']);
 Route::post('lager', [StockController::class, 'store']);
 Route::put('lager/{id}', [StockController::class, 'update']);
 Route::delete('lager/{id}', [StockController::class, 'destroy']);
-Route::get('lager/proizvodi', [StockController::class, 'stockLevel']);
+Route::get('lager/stanje/proizvodi', [StockController::class, 'stockLevel']);
 Route::get('lager/proizvodi/{id}', [StockController::class, 'stockLevelProduct']);
 
 Route::get('transakcije', [TransactionController::class, 'index']);

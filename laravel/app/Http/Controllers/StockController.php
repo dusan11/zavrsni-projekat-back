@@ -68,7 +68,13 @@ class StockController extends Controller
 
     public function stockLevel()
     {
-        $data = DB::table('stocks')->groupBy('product_id')->sum('amount');
+        //$data = DB::table('stocks')->groupBy('product_id')->sum('amount');
+        //$data = Stock::with('product')->groupBy('product_id')->sum('amount');
+        $data = DB::table('stocks')->select(DB::raw('sum(amount) as amount, product_id, products.name as name'))
+            ->join('products', 'products.id', '=', 'stocks.product_id')
+            ->groupBy('product_id')
+            ->get();
+        $data2 = Stock::with('product')->groupBy('product_id')->sum('amount');
         return $data;
     }
 
