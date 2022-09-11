@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2022 at 04:07 PM
+-- Generation Time: Sep 11, 2022 at 11:33 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -37,6 +37,14 @@ CREATE TABLE `companies` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`id`, `name`, `adress`, `account_no`, `email`, `responsible_person`, `created_at`, `updated_at`) VALUES
+(1, 'Kompanija 1', 'Adresa bb', 'ABC7366', 'email@email.com', 'Pero Perovic', '2022-09-03 17:17:05', '2022-09-11 12:46:09'),
+(2, 'Sinopharm', 'Adresa bb', 'KK0876699', 'sinopharm@email.com', 'Janko Janković', '2022-09-09 16:48:13', '2022-09-09 16:48:13');
 
 -- --------------------------------------------------------
 
@@ -93,7 +101,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `date` date NOT NULL,
-  `total_price` decimal(5,2) NOT NULL,
+  `total_price` decimal(20,2) NOT NULL,
   `order_type_id` bigint(20) UNSIGNED NOT NULL,
   `company_id` bigint(20) UNSIGNED NOT NULL,
   `order_status_id` bigint(20) UNSIGNED NOT NULL,
@@ -101,13 +109,24 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `date`, `total_price`, `order_type_id`, `company_id`, `order_status_id`, `created_at`, `updated_at`) VALUES
+(1, '2022-09-07', '80.32', 2, 1, 1, '2022-09-07 19:03:35', '2022-09-07 19:39:28'),
+(2, '2022-09-07', '9000.00', 1, 2, 1, '2022-09-07 19:39:49', '2022-09-09 18:59:14'),
+(3, '2022-09-11', '0.00', 2, 2, 1, '2022-09-11 12:54:54', '2022-09-11 12:54:54'),
+(4, '2022-09-11', '0.00', 2, 2, 1, '2022-09-11 12:55:24', '2022-09-11 12:55:24'),
+(5, '2022-09-11', '44.00', 2, 2, 1, '2022-09-11 12:55:42', '2022-09-11 12:57:14');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_products`
+-- Table structure for table `order_product`
 --
 
-CREATE TABLE `order_products` (
+CREATE TABLE `order_product` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `amount` int(11) NOT NULL,
   `product_id` bigint(20) UNSIGNED NOT NULL,
@@ -115,6 +134,15 @@ CREATE TABLE `order_products` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_product`
+--
+
+INSERT INTO `order_product` (`id`, `amount`, `product_id`, `order_id`, `created_at`, `updated_at`) VALUES
+(2, 1, 4, 1, NULL, NULL),
+(10, 100, 8, 2, NULL, NULL),
+(11, 4, 11, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -129,6 +157,15 @@ CREATE TABLE `order_statuses` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `order_statuses`
+--
+
+INSERT INTO `order_statuses` (`id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Obrada', '2022-09-04 17:54:35', '2022-09-04 17:54:35'),
+(2, 'Završeno', '2022-09-04 17:56:29', '2022-09-04 17:56:54'),
+(3, 'Otkazano', '2022-09-11 11:51:43', '2022-09-11 11:51:43');
+
 -- --------------------------------------------------------
 
 --
@@ -141,6 +178,14 @@ CREATE TABLE `order_types` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_types`
+--
+
+INSERT INTO `order_types` (`id`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'Kupovina', NULL, NULL),
+(2, 'Prodaja', NULL, '2022-09-04 18:10:16');
 
 -- --------------------------------------------------------
 
@@ -189,6 +234,24 @@ CREATE TABLE `products` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `manifacturer`, `certificate_number`, `price`, `created_at`, `updated_at`) VALUES
+(1, 'Apple', 'Sinopharm', 'HSZ35', '12.00', '2022-08-25 17:18:19', '2022-08-25 17:18:19'),
+(2, 'Apple', 'Sinopharm', 'HSZ35', '12.00', '2022-08-25 17:18:20', '2022-08-25 17:18:20'),
+(3, 'Banana', 'Montefarm', 'OO039', '80.32', '2022-08-26 08:11:29', '2022-08-26 08:11:29'),
+(4, 'Banana', 'Montefarm', 'OO039', '80.32', '2022-08-26 08:11:29', '2022-08-26 08:11:29'),
+(5, 'nova proba2', 'neki proizvodjac', 'HSZ35', '11.00', '2022-08-26 08:16:05', '2022-08-26 08:16:05'),
+(6, 'nova proba2', 'neki proizvodjac', 'HSZ35', '11.00', '2022-08-26 08:16:06', '2022-08-26 08:16:06'),
+(7, 'Proba', 'Test', 'AA9488', '13.00', '2022-08-26 08:19:51', '2022-08-26 09:01:31'),
+(8, 'Proba', 'Bla', 'HSZ35', '90.00', '2022-08-26 08:31:29', '2022-08-26 08:31:29'),
+(11, 'Orange', 'ja', 'blabla43', '11.00', '2022-08-30 06:29:40', '2022-08-30 06:29:40'),
+(12, 'nova proba2', 'Montefarm', 'HSZ35', '12.00', '2022-08-30 06:33:48', '2022-08-30 06:33:48'),
+(13, 'nova proba', 'Montefarm', 'HSZ35', '12.74', '2022-08-30 06:34:56', '2022-08-30 07:00:28'),
+(14, 'Najnoviji', 'KKji', '98764', '273.99', '2022-09-09 18:50:26', '2022-09-09 18:50:26');
+
 -- --------------------------------------------------------
 
 --
@@ -203,6 +266,17 @@ CREATE TABLE `stocks` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `stocks`
+--
+
+INSERT INTO `stocks` (`id`, `amount`, `product_id`, `created_at`, `updated_at`) VALUES
+(1, 100, 14, '2022-09-10 13:17:15', '2022-09-10 13:17:15'),
+(2, 156, 14, '2022-09-10 13:17:49', '2022-09-10 13:17:49'),
+(3, -56, 14, '2022-09-10 13:18:12', '2022-09-10 13:48:05'),
+(4, 266, 11, '2022-09-11 10:50:31', '2022-09-11 10:50:31'),
+(5, 488, 2, '2022-09-11 10:50:39', '2022-09-11 10:50:39');
+
 -- --------------------------------------------------------
 
 --
@@ -212,12 +286,20 @@ CREATE TABLE `stocks` (
 CREATE TABLE `transactions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `date` date NOT NULL,
-  `amount` int(11) NOT NULL,
+  `amount` decimal(20,2) NOT NULL,
   `company_id` bigint(20) UNSIGNED NOT NULL,
   `order_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `date`, `amount`, `company_id`, `order_id`, `created_at`, `updated_at`) VALUES
+(1, '2022-09-08', '156.98', 1, 1, '2022-09-08 13:27:56', '2022-09-09 17:53:38'),
+(2, '2022-09-11', '100.00', 2, 2, '2022-09-11 08:32:00', '2022-09-11 08:32:00');
 
 -- --------------------------------------------------------
 
@@ -235,6 +317,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Demo', 'demo@demo.com', NULL, '$2y$10$8m2/OBiiQ7vRn7erM0hRxOsqSPBdmj.8/n10D3nzvwcRqnJ8SkDCe', NULL, '2022-08-22 17:40:02', '2022-09-11 12:42:39');
 
 --
 -- Indexes for dumped tables
@@ -269,9 +358,9 @@ ALTER TABLE `orders`
   ADD KEY `orders_order_status_id_foreign` (`order_status_id`);
 
 --
--- Indexes for table `order_products`
+-- Indexes for table `order_product`
 --
-ALTER TABLE `order_products`
+ALTER TABLE `order_product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `order_products_product_id_foreign` (`product_id`),
   ADD KEY `order_products_order_id_foreign` (`order_id`);
@@ -338,7 +427,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -356,25 +445,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `order_products`
+-- AUTO_INCREMENT for table `order_product`
 --
-ALTER TABLE `order_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `order_product`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_statuses`
 --
 ALTER TABLE `order_statuses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_types`
 --
 ALTER TABLE `order_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -386,25 +475,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -419,9 +508,9 @@ ALTER TABLE `orders`
   ADD CONSTRAINT `orders_order_type_id_foreign` FOREIGN KEY (`order_type_id`) REFERENCES `order_types` (`id`);
 
 --
--- Constraints for table `order_products`
+-- Constraints for table `order_product`
 --
-ALTER TABLE `order_products`
+ALTER TABLE `order_product`
   ADD CONSTRAINT `order_products_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `order_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
